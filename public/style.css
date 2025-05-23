@@ -341,10 +341,16 @@ body {
 }
 
 .project-card a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #6a0dad; /* Primary purple for links */
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
+  cursor: pointer;
+  background-color: #00bcd4;
+  border-radius: 0.4rem;
 }
 
 .project-card a:hover {

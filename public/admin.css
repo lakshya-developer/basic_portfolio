@@ -70,8 +70,8 @@ header button:hover {
     align-items: flex-start; /* Align items to the start (top) by default */
     justify-content: center; /* Center content horizontally */
     box-sizing: border-box; /* Include padding in element's total width and height */
+    min-width: 100%;
     max-width: 1400px; /* Max width for the main content area */
-    margin: 0 auto; /* Center the main content area */
     flex-wrap: wrap; /* Allow items to wrap in the grid */
     gap: 1.5rem; /* Space between message cards */
 }
@@ -106,6 +106,7 @@ header button:hover {
 .message-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    border-color: #00bcd4;
 }
 
 .message-card h3 {

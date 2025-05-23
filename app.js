@@ -54,6 +54,18 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.use(express.json());
 
+
+
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+})
+app.get('/project', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+})
+app.get('/contact', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+})
+
 app.post('/submit-contact', (req, res) => {
   const { name, email, message } = req.body; // Extract data from the request body
 

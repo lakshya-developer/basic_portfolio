@@ -148,22 +148,26 @@ function attachContactFormHandler() {
 // Main function to load content into the #main-content area
 async function loadPage(pageName) {
   try {
+    console.log("0");
     // Show a loading indicator if desired
     mainContent.innerHTML =
       '<p style="text-align: center; color: #00bcd4;">Loading content...</p>';
-
+    console.log("1");
     // Fetch HTML file from 'pages/' using the pageName
     // This path is relative to the 'public' folder, which is served by Express
     const response = await fetch(`pages/${pageName}.html`);
+    console.log("2");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+    console.log("3");
     const html = await response.text();
     mainContent.innerHTML = html;
-
+    console.log("4");
     // Update URL in browser history without reloading
     const newPath = pageName === "main-content" ? "/" : `/${pageName}`;
     history.pushState(null, "", newPath);
+    console.log("5");
 
     // Re-attach specific handlers based on the loaded page
     if (pageName === "main-content") {
