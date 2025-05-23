@@ -4,6 +4,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const Message = require("./models/message");
+const session = require('express-session');
+const password = require('./password')
+
 
 const mongoURL = 'mongodb://localhost:27017/portfolio_contact';
 
@@ -11,6 +14,7 @@ const mongoURL = 'mongodb://localhost:27017/portfolio_contact';
 mongoose.connect(mongoURL)
   .then(() => console.log('MongoDB connected successfully from app.js!'))
   .catch(err => console.error('MongoDB connection error from app.js:', err));
+
 
 
 // Example usage of the User model:
@@ -36,6 +40,10 @@ async function createMessage(name, email, message) {
 
 const app = express();
 
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // Adding middleware 
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -57,6 +65,55 @@ app.post('/submit-contact', (req, res) => {
 
   // In case of an error (e.g., database save failed), you would send:
   // res.status(500).json({ success: false, message: 'Failed to send message.' });
+});
+
+// Using session to protect admin.html
+
+app.use(
+  session({
+    secret: 'KaKaShI@106_JiraiyA',
+    resave: false,
+    saveUninitialized: false
+  })
+)
+
+// server login page.
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+})
+
+// Handle login form
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  // Simple hardcoded auth check (use DB in real apps)
+  if (username == 'admin' & password === password) {
+    req.session.loggedIn = true;
+    res.redirect('/admin');
+  } else {
+    res.send('Invalid credentials. <a href="/login">Try again</a>');
+  }
+
+});
+
+// Middleware to protect admin route
+function checkAuth(req, res, next) {
+  if (req.session.loggedIn) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
+
+app.get('/admin', checkAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+})
+
+// Logout route
+app.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/login');
+  });
 });
 
 const PORT = 3000;
