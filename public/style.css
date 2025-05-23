@@ -189,6 +189,7 @@ body {
 
 #Introduction .container { /* This was previously the main text container, now it's nested */
   /* Keep existing styles like width, max-width, text-align */
+  margin: 0;
   width: 100%; /* Ensure it takes full width of text-content */
   max-width: 600px; /* Max width for the text block itself */
   margin-bottom: 0; /* Remove margin-bottom from here, manage gap with flex */
@@ -248,26 +249,78 @@ body {
   background-color: #2a2a2a; /* Slightly different background for projects section */
 }
 
+/* Existing CSS */
+
 .projects {
-  display: flex;
-  justify-content: center;
-  gap: 30px; /* Increased gap between cards */
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    transition: all 0.3s ease-in-out; /* Add transition to the projects container */
 }
 
 .project-card {
-  width: calc(33% - 30px); /* Adjust width for spacing */
-  min-width: 280px; /* Increased minimum width for cards */
-  display: flex;
-  flex-direction: column;
-  gap: 12px; /* Increased gap within card */
-  background-color: #333; /* Darker background for cards */
-  border: 1px solid #4b0082; /* Darker purple border */
-  border-radius: 10px; /* Slightly more rounded */
-  padding: 20px; /* Increased padding */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  animation: slideIn 0.8s ease-in-out;
+    width: calc(33% - 30px);
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #333;
+    border: 1px solid #4b0082;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: slideIn 0.8s ease-in-out;
+    flex-grow: 1; /* Allow cards to grow to fill space */
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    border-color: #00bcd4;
+}
+
+.project-card.expanded {
+    width: calc(50% - 30px); /* Make it take more width */
+    min-width: auto; /* Remove min-width constraint */
+    z-index: 10; /* Ensure it's above other elements */
+    transform: scale(1.05); /* Slightly larger */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+.project-card.shrunk {
+    width: calc(20% - 30px) ;
+    opacity: 0.6;
+    transform: scale(0.9);
+}
+
+@media (max-width: 768px) {
+    .project-card {
+        width: calc(50% - 30px);
+    }
+
+    .project-card.expanded {
+        width: 95% !important;
+    }
+
+    .project-card.shrunk {
+        width: calc(30% - 30px) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-card {
+        width: 90%;
+    }
+
+    .project-card.expanded {
+        width: 98% !important;
+    }
+
+    .project-card.shrunk {
+        width: calc(40% - 30px) !important;
+    }
 }
 
 .project-card:hover {
