@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Portal</title>
+    <link rel="stylesheet" href="/admin.css" />
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Admin Portal</h1>
+        <button><a href="/logout" class="logout-button">Logout</a></button>
+    </header>
+
+    <main class="container">
+        <h2 >
+            Message Inbox
+        </h2>
+
+        
+            <% if (messages && messages.length > 0) { %>
+                <% messages.forEach(message => { %>
+                    <div class="message-card">
+                        <h3>Name: <span><%= message.name %></span></h3>
+                        <p class="email">Email: <span><%= message.email %></span></p>
+                        <p class="message-content">Message: <span><%= message.message %></span></p>
+                        <p class="timestamp">Received: <span><%= new Date(message.createdAt).toLocaleString() %></span></p>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="loading-text">No messages received yet.</p>
+            <% } %>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Admin Portal. All rights reserved.</p>
+    </footer>
+
+    <script src="/admin.js"></script>
+</body>
+</html>

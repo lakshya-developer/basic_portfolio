@@ -1,68 +1,210 @@
 /* Global styles */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #111;
-  color: #fff;
-  height: 100vh;
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack children vertically */
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #1a1a1a; /* Slightly darker background for better contrast */
+    color: #e0e0e0; /* Lighter text for readability */
+    height: 100vh;
+    width: 100vw;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
+/* Header and Footer Common Styles */
 header, footer {
-  background-color: #4B0082; /* Purple */
-  color: white;
-  text-align: center;
-  padding: 1rem 0;
-  flex-shrink: 0; /* Prevent header/footer from shrinking */
+    background-color: #4B0082; /* Deep Purple */
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    flex-shrink: 0; /* Prevent header/footer from shrinking */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 header {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    display: flex;
+    justify-content: space-between; /* Distribute items with space between */
+    align-items: center;
+    padding: 1rem 2rem; /* Added horizontal padding */
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2rem;
+h1 {
+    margin: 0;
+    font-size: 2.2rem; /* Slightly larger font */
+    cursor: default;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 header button {
-  padding: 0.4rem 0.8rem;
-  font-size: 1rem;
-  background-color: #00bcd4;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1rem;
+    padding: 0.6rem 1.2rem; /* Increased padding for better touch targets */
+    font-size: 1.05rem;
+    background-color: #00bcd4; /* Cyan */
+    color: white; /* Changed to white for better contrast on cyan */
+    border: none;
+    border-radius: 8px; /* More rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    margin-top: 0; /* Remove margin-top from header button if it's directly in flex */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 header button a {
-  color: black;
-  text-decoration: none;
+    color: white; /* Ensure link text is white */
+    text-decoration: none;
+    font-weight: 500;
 }
 
-.header button:hover {
-  background-color: #6a0dad;
+header button:hover {
+    background-color: #0295a9; /* Darker cyan on hover */
+    transform: translateY(-2px); /* Slight lift effect */
 }
 
-/* Login container */
+/* Main Content Area - Container for messages/login form */
 .container {
-  flex-grow: 1; /* Allow the container to grow and take available space */
-  padding: 2rem; 
-  text-align: center;
-  overflow-y: auto; /* Add scroll if content overflows */
-  display: flex; /* Use flexbox to center content vertically */
-  align-items: center; /* Center content vertically */
-  justify-content: center; /* Center content horizontally */
+    flex-grow: 1; /* Allows the container to grow and take available space */
+    padding: 2rem;
+    text-align: center;
+    overflow-y: auto; /* Add scroll if content overflows */
+    display: flex; /* Use flexbox for centering content */
+    align-items: flex-start; /* Align items to the start (top) by default */
+    justify-content: center; /* Center content horizontally */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    max-width: 1400px; /* Max width for the main content area */
+    margin: 0 auto; /* Center the main content area */
+    flex-wrap: wrap; /* Allow items to wrap in the grid */
+    gap: 1.5rem; /* Space between message cards */
 }
 
+.container h2{
+  color: #e0e0e0;
+          text-align: center;
+          width: 100%;
+          margin-bottom: 1.5rem;
+          font-size: 2rem;
+          border-bottom: 2px solid #444;
+          padding-bottom: 1rem;
+}
 
+/* Message Inbox - Renamed from .message for clarity */
+.message-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem; /* Adjusted padding */
+    background-color: #2a2a2a; /* Darker background for message card */
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+    border: 1px solid #444; /* Subtle border */
+    flex: 1 1 calc(33% - 1.5rem); /* Responsive sizing for 3 columns, adjust as needed */
+    min-width: 280px; /* Minimum width for cards before wrapping */
+    max-width: 400px; /* Max width for individual cards */
+    margin: 0.75rem; /* Margin around each card for grid effect */
+    box-sizing: border-box;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.message-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.message-card h3 {
+    color: #00bcd4; /* Cyan for name */
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.message-card .email {
+    font-size: 0.9rem;
+    color: #a0a0a0; /* Lighter grey for email */
+    margin-bottom: 1rem;
+    word-break: break-all; /* Ensures long emails don't overflow */
+}
+
+.message-card .message-content {
+    flex-grow: 1; /* Allows message content to take available space */
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin-bottom: 1rem;
+    border-top: 1px dashed #555; /* Separator for content */
+    padding-top: 1rem;
+}
+
+.message-card .timestamp {
+    font-size: 0.8rem;
+    color: #888; /* Darker grey for timestamp */
+    text-align: right;
+    margin-top: auto; /* Pushes timestamp to the bottom if content varies */
+    padding-top: 0.5rem;
+    border-top: 1px solid #555;
+}
+
+/* Footer specific styles */
 footer {
-  /* margin-top: 100px; */ /* Removed as flexbox handles spacing */
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  flex-shrink: 0; /* Prevent header/footer from shrinking */
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    background-color: #333; /* Slightly different dark background for footer */
+    color: #bbb;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .message-card {
+        flex: 1 1 calc(50% - 1.5rem); /* Two columns on medium screens */
+    }
+    header {
+        padding: 1rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Stack header items vertically */
+        padding: 1rem;
+    }
+    header button {
+        margin-top: 1rem; /* Add space when stacked */
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    .container {
+        padding: 1rem;
+        flex-direction: column; /* Stack message cards vertically on small screens */
+        align-items: center; /* Center stacked cards */
+    }
+    .message-card {
+        flex: 1 1 95%; /* Single column on small screens */
+        max-width: 500px; /* Max width for single column cards */
+        margin: 0.5rem 0; /* Adjust margin for stacked cards */
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.8rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    header button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    .container {
+        padding: 0.5rem;
+    }
+    .message-card {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    .message-card h3 {
+        font-size: 1.2rem;
+    }
+    .message-card .email, .message-card .timestamp {
+        font-size: 0.8rem;
+    }
 }

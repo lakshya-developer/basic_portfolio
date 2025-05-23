@@ -15,3 +15,4 @@ function logout() {
       alert("An error occurred.");
     });
 }
+
