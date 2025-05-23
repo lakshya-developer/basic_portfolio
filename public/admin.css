@@ -1,0 +1,68 @@
+/* Global styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #111;
+  color: #fff;
+  height: 100vh;
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+}
+
+header, footer {
+  background-color: #4B0082; /* Purple */
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  flex-shrink: 0; /* Prevent header/footer from shrinking */
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+header button {
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+header button a {
+  color: black;
+  text-decoration: none;
+}
+
+.header button:hover {
+  background-color: #6a0dad;
+}
+
+/* Login container */
+.container {
+  flex-grow: 1; /* Allow the container to grow and take available space */
+  padding: 2rem; 
+  text-align: center;
+  overflow-y: auto; /* Add scroll if content overflows */
+  display: flex; /* Use flexbox to center content vertically */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+}
+
+
+footer {
+  /* margin-top: 100px; */ /* Removed as flexbox handles spacing */
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  flex-shrink: 0; /* Prevent header/footer from shrinking */
+}
