@@ -1,0 +1,593 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: default;
+}
+
+html {
+  font-family: "Inter", sans-serif; /* Changed font to Inter for a modern look */
+  color: #e0e0e0; /* Lighter grey for default text color */
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1a; /* Slightly softer dark background */
+  color: #e0e0e0; /* Lighter grey for default text color */
+  min-height: 100vh; /* Use min-height for better content flow */
+  width: 100vw;
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#main-content {
+  flex-grow: 1; /* Allows main content to take available vertical space */
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blinkCursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px; /* Adjusted padding */
+  flex-wrap: wrap;
+  background-color: #4b0082; /* Darker shade of purple for header */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+  animation: fadeIn 1s ease-out;
+}
+
+.header h1 {
+  font-size: 2.2rem; /* Slightly larger font for heading */
+  margin: 0;
+  color: #fff; /* Ensure heading is pure white */
+  cursor: pointer; /* Make header title clickable */
+}
+
+.header nav {
+  width: auto;
+  margin-left: auto;
+}
+
+.header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* Increased gap for navigation items */
+  margin: 0;
+  padding: 0;
+}
+
+.header nav ul li a { /* Targeted <a> for proper hover effect */
+  color: #e0e0e0; /* Lighter grey for navigation links */
+  text-decoration: none;
+  font-weight: 500; /* Slightly lighter font-weight */
+  padding: 8px 15px; /* Adjusted padding */
+  border-radius: 6px; /* Slightly less rounded */
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.header nav ul li a:hover {
+  background-color: #6a0dad; /* Primary purple on hover */
+  color: white; /* White text on hover */
+}
+
+/* Sections */
+.section {
+  color: #e0e0e0;
+  padding: 60px 0; /* Increased padding for sections */
+  animation: fadeIn 1.2s ease-in;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 2.5rem; /* Larger section headings */
+  margin-bottom: 40px; /* Increased margin */
+  color: #00bcd4; /* Accent color for section headings */
+  text-shadow: 0 0 5px rgba(0, 188, 212, 0.5); /* Subtle glow effect */
+}
+
+/* About Section (Styles for dynamically loaded content) */
+#about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem; /* Slightly larger font for readability */
+  color: #e0e0e0;
+  padding: 30px; /* Increased padding */
+}
+
+#about .container {
+  height: auto;
+  text-align: center;
+  line-height: 1.6; /* Improved line height for readability */
+}
+
+/* Introduction Section */
+#Introduction {
+  display: flex;
+  justify-content: center; /* Center the main content horizontally */
+  align-items: center; /* Center items vertically */
+  padding: 60px 20px;
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  animation: slideFadeIn 1s ease-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+  /* Removed flex-wrap here, handled by content-wrapper */
+}
+
+/* New inner container for text and image alignment */
+#Introduction .content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally within its own space */
+  gap: 50px; /* Space between text and image */
+  max-width: 1000px; /* Max width for the content wrapper */
+  width: 90%; /* Responsive width */
+  flex-wrap: wrap; /* Allow content and image to wrap */
+}
+
+#Introduction .text-content {
+  flex: 1; /* Allow text content to grow */
+  min-width: 300px; /* Minimum width for text before wrapping */
+  text-align: center; /* Center text within its column */
+}
+
+#Introduction .container { /* This was previously the main text container, now it's nested */
+  /* Keep existing styles like width, max-width, text-align */
+  width: 100%; /* Ensure it takes full width of text-content */
+  max-width: 600px; /* Max width for the text block itself */
+  margin-bottom: 0; /* Remove margin-bottom from here, manage gap with flex */
+}
+
+/* Typing Text Wrapping */
+#typing-text {
+  overflow: hidden; /* Keep overflow hidden for typing effect */
+  white-space: normal; /* Allow text to wrap */
+  word-wrap: break-word; /* Ensure long words break */
+  padding: 4px;
+  display: inline-block; /* Keep inline-block for width calculation */
+  max-width: 100%; /* Ensure it respects parent width */
+  color: #00bcd4; /* Accent color for typing text */
+  text-align: center; /* Center the typing text itself */
+}
+
+/* Image container */
+#Introduction .image-container {
+  flex-shrink: 0; /* Prevent image from shrinking too much */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0; /* No padding top here, managed by gap */
+}
+
+#Introduction > div img { /* This targets the image itself */
+  width: 180px; /* Fixed width for the normal state */
+  height: 180px; /* Fixed height for the normal state (makes it square for 50% border-radius) */
+  max-width: 90%; /* Ensure it's responsive and doesn't exceed parent width */
+  object-fit: cover; /* Ensures image covers the area */
+  border-radius: 50%; /* Starts as a circle */
+  margin-bottom: 0; /* Remove margin-bottom as it's now in image-container padding */
+  border: 4px solid #6a0dad;
+  box-shadow: 0 0 15px rgba(106, 13, 173, 0.7);
+  transition: all 0.4s ease-in-out; /* Smooth transition for all changing properties */
+  cursor: pointer; /* Indicate it's clickable */
+  z-index: 1; /* Ensure it's above other elements when enlarged */
+  position: relative; /* Needed for z-index to work correctly */
+}
+
+/* New CSS for enlarged image */
+#Introduction > div img.enlarged {
+  width: 300px; /* New width for enlarged state (rectangular shape) */
+  height: 400px; /* New height for enlarged state (portrait rectangular) */
+  max-width: 90vw; /* Ensure it doesn't exceed viewport width when enlarged */
+  border-radius: 8px; /* Rectangular with slight rounded corners */
+  box-shadow: 0 0 30px rgba(0, 188, 212, 1), 0 10px 20px rgba(0, 0, 0, 0.5); /* More prominent glow + depth */
+  border-color: #00bcd4; /* Change border color to accent */
+  transform: translateY(-20px); /* Slightly lift the image when enlarged for better visibility */
+  z-index: 10; /* Bring to front when enlarged */
+}
+
+/* Projects Section (Styles for dynamically loaded content) */
+#projects.section {
+  padding: 60px 20px; /* Consistent padding */
+  background-color: #2a2a2a; /* Slightly different background for projects section */
+}
+
+.projects {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Increased gap between cards */
+  flex-wrap: wrap;
+}
+
+.project-card {
+  width: calc(33% - 30px); /* Adjust width for spacing */
+  min-width: 280px; /* Increased minimum width for cards */
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Increased gap within card */
+  background-color: #333; /* Darker background for cards */
+  border: 1px solid #4b0082; /* Darker purple border */
+  border-radius: 10px; /* Slightly more rounded */
+  padding: 20px; /* Increased padding */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: slideIn 0.8s ease-in-out;
+}
+
+.project-card:hover {
+  transform: translateY(-5px); /* More pronounced hover effect */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Stronger shadow on hover */
+  border-color: #00bcd4; /* Accent color border on hover */
+}
+
+.project-card h3 {
+  margin-top: 0;
+  color: #00bcd4; /* Accent color for card headings */
+  font-size: 1.2rem; /* Larger heading */
+}
+
+.project-card p {
+  margin-bottom: 15px; /* Increased margin for text */
+  color: #c0c0c0; /* Slightly lighter text for readability */
+}
+
+.project-card a {
+  color: #6a0dad; /* Primary purple for links */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.project-card a:hover {
+  color: #00bcd4; /* Accent color on link hover */
+}
+
+/* Contact Form (Styles for dynamically loaded content) */
+#contact .container {
+  max-width: 650px; /* Slightly wider form */
+  padding: 40px; /* Increased padding */
+  background-color: #2a2a2a; /* Darker background for form container */
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+form label {
+  display: block;
+  margin-top: 15px; /* Increased margin */
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 12px; /* Increased padding */
+  margin-top: 8px;
+  border: 1px solid #4b0082; /* Darker purple border */
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #333;
+  color: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #00bcd4; /* Accent color on focus */
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.6); /* Accent color glow on focus */
+}
+
+form button {
+  background-color: #6a0dad; /* Primary purple for button */
+  color: white;
+  padding: 12px 25px; /* Adjusted padding */
+  border: none;
+  border-radius: 6px;
+  font-size: 1.05rem; /* Slightly larger font for button */
+  margin-top: 25px; /* Increased margin */
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Button shadow */
+}
+
+form button:hover {
+  background-color: #00bcd4; /* Accent color on hover */
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #4b0082; /* Darker purple for footer */
+  color: #e0e0e0; /* Lighter grey for footer text */
+  padding: 15px 20px; /* Adjusted padding */
+  text-align: center;
+  font-size: 0.85rem;
+  animation: fadeIn 1.5s ease-in;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Softer top border */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Adjusted gap */
+}
+
+.footer-content p {
+  margin: 0;
+  color: #c0c0c0; /* Slightly different shade for copyright text */
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Increased gap for social links */
+  margin-top: 8px; /* Adjusted top margin */
+}
+
+.social-links a {
+  color: #e0e0e0; /* Lighter grey for social icons */
+  text-decoration: none;
+  font-size: 1.2rem; /* Larger social icons/text */
+  font-weight: bold;
+  padding: 8px 12px; /* Adjusted padding */
+  border-radius: 8px; /* Slightly more rounded */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #4b0082; /* Darker purple text on hover */
+  background-color: #00bcd4; /* Accent color background on hover */
+}
+
+/* Custom Message Box Styles */
+.message-box-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.message-box-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.message-box-content {
+  background-color: #333;
+  color: #e0e0e0;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.message-box-overlay.visible .message-box-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.message-box-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #00bcd4; /* Accent color */
+}
+
+.message-box-content p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.message-box-content button {
+  background-color: #6a0dad;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.message-box-content button:hover {
+  background-color: #00bcd4; /* Accent color on hover */
+}
+
+
+/* Responsive Design */
+
+/* For tablets and below */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .header h1 {
+    width: 100%;
+    margin: 10px 0;
+    font-size: 1.8rem;
+  }
+
+  .header nav {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 15px; /* Increased margin */
+  }
+
+  .header nav ul {
+    flex-direction: column;
+    gap: 12px; /* Adjusted gap */
+    align-items: center;
+  }
+
+  .section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  #about {
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  #Introduction {
+    flex-direction: column; /* Stack text and image vertically */
+    padding: 40px 15px;
+    font-size: 1rem;
+  }
+  #Introduction .container {
+    width: 95%;
+    margin-bottom: 30px; /* More space when stacked */
+  }
+  #Introduction > div img {
+    width: 150px; /* Smaller normal size on tablets */
+    height: 150px;
+  }
+  #Introduction > div img.enlarged {
+    width: 250px; /* Smaller enlarged width */
+    height: 350px; /* Smaller enlarged height */
+  }
+
+  .projects {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .project-card {
+    width: 90%;
+    min-width: auto; /* Allow cards to shrink more */
+  }
+
+  #contact .container {
+    padding: 30px;
+  }
+
+  form button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+/* For phones and small devices */
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .section h2 {
+    font-size: 1.6rem;
+  }
+
+  form input,
+  form textarea {
+    font-size: 0.9rem;
+  }
+
+  form button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  footer {
+    padding: 10px 15px;
+  }
+
+  .social-links {
+    gap: 10px;
+    margin-top: 5px;
+  }
+
+  .social-links a {
+    font-size: 1.1rem;
+    padding: 6px 10px;
+  }
+
+  #Introduction > div img {
+    width: 120px; /* Even smaller normal size on phones */
+    height: 120px;
+  }
+  #Introduction > div img.enlarged {
+    width: 200px; /* Even smaller enlarged width */
+    height: 280px; /* Even smaller enlarged height */
+  }
+}
