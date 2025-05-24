@@ -5,19 +5,22 @@ const messageSchema = new mongoose.Schema({
   name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: false
     },
     email: {
         type: String,
         required: true,
         trim: true,
         lowercase: true,
+        unique: false,
         match: [/.+@.+\..+/, 'Please fill a valid email address']
     },
     message: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: false
     },
     createdAt: {
         type: Date,
